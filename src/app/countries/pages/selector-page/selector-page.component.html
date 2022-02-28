@@ -1,0 +1,45 @@
+<h1 class="text-center font-bold py-5 text-2xl">Selector Nested </h1>
+
+<div class="container mx-auto">
+    <form [formGroup]="myForm">
+
+        <!-- CONTINENT -->
+        <div class="py-2 shadow-md rounded-md px-2">
+            <label class="font-bold p-2">Continent</label>
+            <select class="w-full py-2" formControlName="region">
+                <option value="">Select a Region</option>
+                <option *ngFor="let region of regions" [value]="region | lowercase">{{region}}</option>
+            </select>
+        </div>
+
+        <!-- COUNTRY-->
+        <div class="py-2 shadow-md rounded-md px-2" *ngIf="countries.length !==0">
+            <label class="font-bold p-2">Contry</label>
+            <select class="w-full py-2" formControlName="country">
+                <option value="">Select a Country</option>
+                <option *ngFor="let country of countries" [value]="country.alpha3Code | lowercase">{{country.name}}
+                </option>
+            </select>
+        </div>
+
+  
+        <!-- FRONTIER-->
+        <div class="py-2 shadow-md rounded-md px-2" *ngIf="frontiers.length !==0">
+            <label class="font-bold p-2">Frontier</label>
+            <select class="w-full py-2" formControlName="frontier">
+                <option value="">Select a Frontier</option>
+                <option *ngFor="let frontier of frontiers" [value]="frontier.alpha3Code">{{frontier.name}}</option>
+            </select>
+        </div>
+      <div *ngIf="loading">
+            loading ...
+        </div>
+
+        <button class="rounded-md bg-blue-200 px-5 py-2 my-5">Submit</button>
+    </form>
+    <hr>
+
+    <h1 class="mt-10">My form</h1>
+    <pre>Valid : {{myForm.valid}}</pre>
+    <pre>{{myForm.value | json}}</pre>
+</div>
